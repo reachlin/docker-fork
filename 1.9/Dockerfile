@@ -1,8 +1,7 @@
-FROM alpine:3.2
+FROM debian:jessie
 
-RUN apk add --update \
-		curl \
-	&& rm -rf /var/cache/apk/*
+RUN apt-get update
+RUN apt-get install -y curl
 
 ENV DOCKER_BUCKET get.docker.com
 ENV DOCKER_VERSION 1.9.1
