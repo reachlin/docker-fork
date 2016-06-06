@@ -1,15 +1,16 @@
-FROM reachlin/docker:1.9
+FROM docker:1.10
 
 # https://github.com/docker/docker/blob/master/project/PACKAGERS.md#runtime-dependencies
-#RUN apk add --update \
-#		btrfs-progs \
-#		e2fsprogs \
-#		iptables \
-#		xz \
-#	&& rm -rf /var/cache/apk/*
+RUN apk add --no-cache \
+		btrfs-progs \
+		e2fsprogs \
+		e2fsprogs-extra \
+		iptables \
+		xfsprogs \
+		xz
 
 # TODO aufs-tools
-RUN apt-get update && apt-get install -y wget iptables
+
 ENV DIND_COMMIT 3b5fac462d21ca164b3778647420016315289034
 
 RUN wget "https://raw.githubusercontent.com/docker/docker/${DIND_COMMIT}/hack/dind" -O /usr/local/bin/dind \
